@@ -31,7 +31,7 @@ pedestrian_shape = (150, 150)
 
 
 def load_image():
-    uploaded_file = st.file_uploader("Choose a JPG file", type="jpg")
+    uploaded_file = st.file_uploader("Choose a jpg file", type=["jpg", "jpeg"])
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         image = image.save('images/file.jpg')
@@ -58,7 +58,6 @@ def cifar():
 
     return prob, prob_max
     
-
 def scene():
     image = pre_scene()
     
@@ -70,7 +69,6 @@ def scene():
     prob_max = prob.style.highlight_max(axis=0)
 
     return prob, prob_max
-
 
 def pedestrian():
     image = pre_pedestrian()
@@ -102,23 +100,31 @@ def fire():
 def run_demo():
     st.title('HEPS')
     st.header('Description')
-    st.info("""This tool aims to reduce the **reaction 
-    time** against fire incidents and provide a **real-time description** of the situation.
-    This has the potential to **strengthen the fire safety system** in cities, 
-    through an automated and distributed framework, letting more fires incidents to be stopped on time
+    st.info("""
+    The initial concept of this project implied building a web application that could 
+    identify fire hazards on images and output a description 
+    of the situation portrayed in the image (e.g. environment 
+    classification, objects classification, pedestrian detection)
+    """)
+    st.markdown("""
+    This framework could substantially improve the efficiency of fire 
+    fighting in smart cities, it reduces the 
+    time to detect hazardous situations, hence it 
+    speeds up the fire department time to act.
     """)
 
 
     st.header('How it works?')
     st.error("""This is an **Alpha version** of the project, real world applications would require a video processing 
     that would feed the machine learning models API's, instead of an user input image presented in this demo.""")
-    st.markdown("""
-    Pick an *.png image* of your choice, save the image and load on the section below. 
-    The application *currently* uses **4 Convolutional Networks** in order to 
-    predict if the image contains **Fire**, **Pedestrians**,  **CIFAR10 objects** and it's **environment**
+    st.success("""
+    Pick an *.jpg/.jpeg* image of your choice, save the image and load on the section below. 
+    The models' labels are displayed on the sidebar menu, 
+    once you select the model you desire to run, the 
+    predictions will appear below each label.
     """)
 
-    st.header('Test yourself!')
+    st.header('Try it out!')
     path = load_image()
     if path is not None:
 
@@ -145,32 +151,31 @@ def run_demo():
             prob_c, prob_max_c = pedestrian()
             st.sidebar.table(prob_max_c)
 
-        st.subheader('Convolutional Filters and Feature maps')
-        st.info("""
-            The first plot represents a set of **filters from the 
-            fire model** while the second plot represents a **set 
-            of feature maps** from the model specified below
-        """)
-        plot_filters('models/fire.h5')
-
-        path = st.radio("Pick one model to plot the Feature maps",
-        ('Fire', 'CIFAR10', 'Scene', 'People'))
-        layer_number = st.number_input('Choose a layer number')
-        layer_number = int(layer_number)
-        if path == 'Fire':
-            model_path = fire_model_path[-1]
-            shape = fire_shape
-        elif path == 'CIFAR10':
-            model_path = cifar_model_path[-1]
-            shape = cifar_shape
-        elif path == 'Scene':
-            model_path = scene_model_path[-1]
-            shape = scene_shape
-        elif path == 'People':
-            model_path = pedestrian_model_path[-1]
-            shape = pedestrian_shape
-        plot_feature_maps(model_path, layer_number, shape)
-
-
-
         
+
+def run_how_it_works():
+    st.subheader('Convolutional Filters and Feature maps')
+    st.info("""
+        The first plot represents a set of **filters from the 
+        fire model** while the second plot represents a **set 
+        of feature maps** from the model specified below
+    """)
+    plot_filters('models/fire.h5')
+
+    path = st.radio("Pick one model to plot the Feature maps",
+    ('Fire', 'CIFAR10', 'Scene', 'People'))
+    layer_number = st.number_input('Choose a layer number')
+    layer_number = int(layer_number)
+    if path == 'Fire':
+        model_path = fire_model_path[-1]
+        shape = fire_shape
+    elif path == 'CIFAR10':
+        model_path = cifar_model_path[-1]
+        shape = cifar_shape
+    elif path == 'Scene':
+        model_path = scene_model_path[-1]
+        shape = scene_shape
+    elif path == 'People':
+        model_path = pedestrian_model_path[-1]
+        shape = pedestrian_shape
+    plot_feature_maps(model_path, layer_number, shape)
