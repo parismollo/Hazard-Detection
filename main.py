@@ -11,13 +11,13 @@ def main():
     st.sidebar.markdown('*Made by* **@parismollo**')
     st.sidebar.title("What to do?")
     app_mode = st.sidebar.selectbox("Choose the app mode",
-        ["Demo", "Models performance", "How it works"])
+        ["Demo"])
     if app_mode == "Demo":
         run_demo()
-    elif app_mode == "Models performance":
-        run_performance()
-    elif app_mode == "How it works":
-        run_how_it_works()
+    # elif app_mode == "Models performance":
+    #     run_performance()
+    # elif app_mode == "How it works":
+    #     run_how_it_works()
         
 
 if __name__ == "__main__":

@@ -31,7 +31,7 @@ pedestrian_shape = (150, 150)
 
 
 def load_image():
-    uploaded_file = st.file_uploader("Choose a jpg file", type=["jpg", "jpeg"])
+    uploaded_file = st.file_uploader("", type=["jpg", "jpeg"])
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
         image = image.save('images/file.jpg')
@@ -99,11 +99,12 @@ def fire():
 
 def run_demo():
     st.title('HEPS')
+    st.error("**Alpha Version v0.3.0** :warning:")
     st.header('Description')
     st.info("""
     The initial concept of this project implied building a web application that could 
-    identify fire hazards on images and output a description 
-    of the situation portrayed in the image (e.g. environment 
+    **identify fire hazards on images and output a description 
+    of the situation portrayed in the image** (e.g. environment 
     classification, objects classification, pedestrian detection)
     """)
     st.markdown("""
@@ -114,20 +115,18 @@ def run_demo():
     """)
 
 
-    st.header('How it works?')
-    st.error("""This is an **Alpha version** of the project, real world applications would require a video processing 
-    that would feed the machine learning models API's, instead of an user input image presented in this demo.""")
-    st.success("""
-    Pick an *.jpg/.jpeg* image of your choice, save the image and load on the section below. 
-    The models' labels are displayed on the sidebar menu, 
-    once you select the model you desire to run, the 
-    predictions will appear below each label.
-    """)
-
     st.header('Try it out!')
+    st.success(""" 
+    **Predictions will be displayed on the sidebar menu**, 
+    to open the menu click on the **black arrow** 
+    on the top left corner of your screen
+    """)
+    st.markdown(""" Pick an **.JPG or .JPEG** image of your choice, save the image and load on the section below.""")
+    data_load_state = st.sidebar.markdown('*Results will appear here* :heavy_exclamation_mark:')
     path = load_image()
     if path is not None:
 
+        data_load_state.text('')
         plot_input()
         st.sidebar.title('Predictions')
 
