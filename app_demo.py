@@ -116,7 +116,7 @@ def run_demo():
 
 
     st.header('Try it out!')
-    st.success(""" 
+    st.info(""" 
     **Predictions will be displayed on the sidebar menu**, 
     to open the menu click on the **black arrow** 
     on the top left corner of your screen
@@ -148,8 +148,7 @@ def run_demo():
         st.sidebar.markdown(':busts_in_silhouette: **Pedestrians**')
         prob_c, prob_max_c = pedestrian()
         st.sidebar.table(prob_max_c)
-
-        
+        st.success("**Predictions ready!** Click on the **arrow at the top left side of your screen** to see the results")        
 
 def run_how_it_works():
     st.subheader('Convolutional Filters and Feature maps')
