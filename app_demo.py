@@ -129,27 +129,26 @@ def run_demo():
     if path is not None:
 
         plot_input()
-        st.sidebar.title('Models')
-        run_fire = st.sidebar.checkbox('Fire')
-        if run_fire:
-            prob_f, prob_max_f = fire()
-            st.sidebar.table(prob_max_f)
+        st.sidebar.title('Predictions')
 
-        run_scene = st.sidebar.checkbox('Environment')
-        if run_scene:
-            prob_s, prob_max_s = scene()
-            st.sidebar.table(prob_max_s)
+        st.sidebar.markdown(':fire: **Fire**')
+        prob_f, prob_max_f = fire()
+        st.sidebar.table(prob_max_f)
 
-        run_cifar = st.sidebar.checkbox('CIFAR10')
-        if run_cifar:
-            st.warning("Attention! If image doesn't contains CIFAR10 objects, model will not be accurate.")
-            prob_c, prob_max_c = cifar()
-            st.sidebar.table(prob_max_c)
+        st.sidebar.markdown(':city_sunset: **Scene**')
+        prob_s, prob_max_s = scene()
+        st.sidebar.table(prob_max_s)
+
         
-        run_pedestrian = st.sidebar.checkbox('People')
-        if run_pedestrian:
-            prob_c, prob_max_c = pedestrian()
-            st.sidebar.table(prob_max_c)
+        st.sidebar.markdown(':blue_car: **CIFAR10**')
+        st.warning("Attention! If image doesn't contains CIFAR10 objects, model will not be accurate.")
+        prob_c, prob_max_c = cifar()
+        st.sidebar.table(prob_max_c)
+        
+
+        st.sidebar.markdown(':busts_in_silhouette: **Pedestrians**')
+        prob_c, prob_max_c = pedestrian()
+        st.sidebar.table(prob_max_c)
 
         
 
