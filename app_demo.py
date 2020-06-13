@@ -8,7 +8,6 @@ import numpy as np
 import cv2
 from PIL import Image
 import pandas as pd
-from filters_feature import plot_filters, plot_feature_maps
 
 cifar_class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
     'dog', 'frog', 'horse', 'ship', 'truck']
@@ -149,30 +148,3 @@ def run_demo():
         prob_c, prob_max_c = pedestrian()
         st.sidebar.table(prob_max_c)
         st.success("**Predictions ready!** Click on the **arrow at the top left side of your screen** to see the results")        
-
-def run_how_it_works():
-    st.subheader('Convolutional Filters and Feature maps')
-    st.info("""
-        The first plot represents a set of **filters from the 
-        fire model** while the second plot represents a **set 
-        of feature maps** from the model specified below
-    """)
-    plot_filters('models/fire.h5')
-
-    path = st.radio("Pick one model to plot the Feature maps",
-    ('Fire', 'CIFAR10', 'Scene', 'People'))
-    layer_number = st.number_input('Choose a layer number')
-    layer_number = int(layer_number)
-    if path == 'Fire':
-        model_path = fire_model_path[-1]
-        shape = fire_shape
-    elif path == 'CIFAR10':
-        model_path = cifar_model_path[-1]
-        shape = cifar_shape
-    elif path == 'Scene':
-        model_path = scene_model_path[-1]
-        shape = scene_shape
-    elif path == 'People':
-        model_path = pedestrian_model_path[-1]
-        shape = pedestrian_shape
-    plot_feature_maps(model_path, layer_number, shape)
