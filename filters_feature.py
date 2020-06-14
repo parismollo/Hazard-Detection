@@ -116,7 +116,7 @@ def run_how_it_works():
     """)
     path = st.selectbox("Select a model",
         ["Fire", "CIFAR10", "Scene", "People"])
-    
+    st.warning("This will take a few seconds...:hourglass_flowing_sand:")
     if path == 'Fire':
         model_path = fire_model_path[-1]
         shape = fire_shape

@@ -98,7 +98,7 @@ def fire():
 
 def run_demo():
     st.title('HEPS')
-    st.error("**Alpha Version v0.4.0** :warning:")
+    st.error("**Alpha Version v0.4.1** :warning:")
     st.header('Description')
     st.info("""
     The initial concept of this project implied building a web application that could 
