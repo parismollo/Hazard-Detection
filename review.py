@@ -17,6 +17,7 @@ def review():
     The models are **still on development**, your feedback can help me to build more accurate models.
     **Please leave a description of what you experienced** and **what you expected**. To submit the review, **press CTRL+ENTER**""")
     results_review = st.text_area('Leave a general review on the results and info on the image you tested', height=1)
+    st.warning('On **mobile**, after writing the review, **click over** "Press ctrl+Enter to apply", so that the review can be submited.')
     if  results_review:
         s = get_random_alphaNumeric_string(3)
         f = open('reviews/review.txt', 'a')
