@@ -99,7 +99,7 @@ def fire():
 def run_demo():
     st.title('FESS')
     st.subheader('Fire and Environment Security Software')
-    st.error("**Alpha Version v0.5.0** :warning:")
+    st.error("**Alpha Version v0.5.2** :warning:")
     st.header('Description')
     st.info("""
     The initial concept of this project implied building a web application that could 
