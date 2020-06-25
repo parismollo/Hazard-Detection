@@ -33,3 +33,7 @@ def read_review():
     for line in f:
         st.markdown(f"{line}")
 
+def temporary_message():
+    st.title('Ops....')
+    st.error('This feature is under development, comeback later.')
+    st.markdown("For while, don't hesitate to contact me via social media at @parismollo to talk about the project.")

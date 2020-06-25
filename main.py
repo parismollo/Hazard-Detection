@@ -1,7 +1,7 @@
 import streamlit as st
 from app_demo import run_demo
 from filters_feature import run_how_it_works
-from review import review
+from review import review, temporary_message
 # from evaluation import run_performance
 from PIL import Image
 
@@ -17,7 +17,8 @@ def main():
     if app_mode == "Demo":
         run_demo()
     elif app_mode == "Review":
-        review()
+        # review()
+        temporary_message()
     elif app_mode == "How it works":
         run_how_it_works()
         
