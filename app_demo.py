@@ -16,10 +16,10 @@ fire_class_names = ['no fire', 'fire']
 pedestrian_class_names = ['no people', 'people']
 
 
-fire_model_path = ('Fire', 'models/fire.h5')
+fire_model_path = ('Fire', 'models/fire_e20_3vgg_zoom_brigh.h5')
 cifar_model_path = ('CIFAR10', 'models/cifar.h5')
 scene_model_path = ('Scene', 'models/scene.h5')
-pedestrian_model_path = ('People', 'models/pedestrian.h5')
+pedestrian_model_path = ('People', 'models/pedestrian_tl_norandom_largedata.h5')
 
 
 fire_shape = (150, 150)
@@ -73,10 +73,10 @@ def pedestrian():
     image = pre_pedestrian()
     
     with st.spinner('Loading model...'):
-        model = tf.keras.models.load_model('models/pedestrian.h5')
+        model = tf.keras.models.load_model('models/pedestrian_tl_norandom_largedata.h5')
     
-    pred_prob = model.predict(image).reshape(2)
-    prob = pd.DataFrame(pred_prob, columns=['confidence'], index=pedestrian_class_names)
+    pred_prob = model.predict(image)
+    prob = pd.DataFrame(pred_prob, columns=['probability'], index=['pedestrian'])
     prob_max = prob.style.highlight_max(axis=0)
 
     return prob, prob_max
@@ -87,10 +87,10 @@ def fire():
     image = pre_fire()
     
     with st.spinner('Loading model...'):
-        model = tf.keras.models.load_model('models/fire.h5')
+        model = tf.keras.models.load_model('models/fire_e20_3vgg_zoom_brigh.h5')
     
-    pred_prob = model.predict(image).reshape(2)
-    prob = pd.DataFrame(pred_prob, columns=['confidence'], index=fire_class_names)
+    pred_prob = model.predict(image)
+    prob = pd.DataFrame(pred_prob, columns=['probability'], index=['fire'])
     prob_max = prob.style.highlight_max(axis=0)
 
     return prob, prob_max
@@ -138,10 +138,10 @@ def run_demo():
         st.sidebar.table(prob_max_s)
 
         
-        st.sidebar.markdown(':blue_car: **CIFAR10**')
-        st.warning("Attention! If image doesn't contains CIFAR10 objects, model will not be accurate.")
-        prob_c, prob_max_c = cifar()
-        st.sidebar.table(prob_max_c)
+        # st.sidebar.markdown(':blue_car: **CIFAR10**')
+        # st.warning("Attention! If image doesn't contains CIFAR10 objects, model will not be accurate.")
+        # prob_c, prob_max_c = cifar()
+        # st.sidebar.table(prob_max_c)
         
 
         st.sidebar.markdown(':busts_in_silhouette: **Pedestrians**')

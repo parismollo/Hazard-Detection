@@ -11,7 +11,7 @@ from app_demo import fire_model_path, cifar_model_path, scene_model_path, pedest
 def plot_filters(model_path):
     model = tf.keras.models.load_model(model_path)
 
-    filters, biases = model.layers[1].get_weights()
+    filters, biases = model.layers[0].get_weights()
     f_min, f_max = filters.min(), filters.max()
     filters = (filters - f_min) / (f_max - f_min)
 
@@ -102,7 +102,7 @@ def run_how_it_works():
         convolution will be a feature map (i.e.highlighted features of the input)
     """)
     st.subheader('Filters look like this')
-    plot_filters('models/fire.h5')
+    plot_filters('models/fire_e20_3vgg_zoom_brigh.h5')
 
  
     st.subheader('Feature Maps')
@@ -115,14 +115,14 @@ def run_how_it_works():
         complex shapes, while the low-level layers will identify simpler shapes.** 
     """)
     path = st.selectbox("Select a model",
-        ["Fire", "CIFAR10", "Scene", "People"])
+        ["Fire", "Scene", "People"])
     st.warning("This will take a few seconds...:hourglass_flowing_sand:")
     if path == 'Fire':
         model_path = fire_model_path[-1]
         shape = fire_shape
-    elif path == 'CIFAR10':
-        model_path = cifar_model_path[-1]
-        shape = cifar_shape
+    # elif path == 'CIFAR10':
+    #     model_path = cifar_model_path[-1]
+    #     shape = cifar_shape
     elif path == 'Scene':
         model_path = scene_model_path[-1]
         shape = scene_shape
