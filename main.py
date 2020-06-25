@@ -1,6 +1,7 @@
 import streamlit as st
 from app_demo import run_demo
 from filters_feature import run_how_it_works
+from review import review
 # from evaluation import run_performance
 from PIL import Image
 
@@ -12,11 +13,11 @@ def main():
     st.sidebar.markdown('*Made by* **@parismollo**')
     st.sidebar.title("What to do?")
     app_mode = st.sidebar.selectbox("Choose the app mode",
-        ["Demo", "How it works"])
+        ["Demo", "How it works", "Review"])
     if app_mode == "Demo":
         run_demo()
-    # elif app_mode == "Models performance":
-    #     run_performance()
+    elif app_mode == "Review":
+        review()
     elif app_mode == "How it works":
         run_how_it_works()
         

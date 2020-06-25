@@ -8,6 +8,7 @@ import numpy as np
 import cv2
 from PIL import Image
 import pandas as pd
+from review import get_random_alphaNumeric_string
 
 cifar_class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
     'dog', 'frog', 'horse', 'ship', 'truck']
@@ -26,7 +27,6 @@ fire_shape = (150, 150)
 cifar_shape = (32, 32)
 scene_shape = (150, 150)
 pedestrian_shape = (150, 150)
-
 
 
 def load_image():
@@ -97,7 +97,8 @@ def fire():
 
 
 def run_demo():
-    st.title('HEPS')
+    st.title('FESS')
+    st.subheader('Fire and Environment Security Software')
     st.error("**Alpha Version v0.5.0** :warning:")
     st.header('Description')
     st.info("""
@@ -147,4 +148,4 @@ def run_demo():
         st.sidebar.markdown(':busts_in_silhouette: **Pedestrians**')
         prob_c, prob_max_c = pedestrian()
         st.sidebar.table(prob_max_c)
-        st.success("**Predictions ready!** Click on the **arrow at the top left side of your screen** to see the results")        
+        st.success("**Predictions ready!** Click on the **arrow at the top left side of your screen** to see the results")
