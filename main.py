@@ -13,12 +13,12 @@ def main():
     st.sidebar.markdown('*Made by* **@parismollo**')
     st.sidebar.title("What to do?")
     app_mode = st.sidebar.selectbox("Choose the app mode",
-        ["Demo", "How it works", "Review"])
+        ["Demo", "How it works"])
     if app_mode == "Demo":
         run_demo()
-    elif app_mode == "Review":
-        # review()
-        temporary_message()
+    # elif app_mode == "Review":
+    #     # review()
+    #     temporary_message()
     elif app_mode == "How it works":
         run_how_it_works()
         
